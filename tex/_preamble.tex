@@ -1,3 +1,45 @@
+%
+% This file contains configuration common to all guides.
+% It is where all packages must be declared, along with project-wide configuration.
+%
+
+% No page numbering for individual guides -- overridden in cosig_full when compiling the entire project
+\pagenumbering{gobble}
+
+% Commands for the start of each guide
+\newcommand{\cosigpart}[1]{
+  \addcontentsline{toc}{part}{#1}
+}
+\newcommand{\cosigsection}[2]{
+  \section*{#1}
+  \phantomsection % avoid warnings from hyperref about the anchor of a bookmark and its parent's
+  Last updated: #2 | \href{https://cosig.net}{cosig.net} | DOI: \href{https://doi.org/10.17605/OSF.IO/2KDEZ}{10.17605/OSF.IO/2KDEZ}
+  \addcontentsline{toc}{section}{#1}
+}
+
+%
+% Please keep the sections alphabetized by package name, unless a package needs to come first.
+%
+
+% Customize the table of contents
+% Must come first or we get a "\@starttoc has already been redefined" warning and the package doesn't work
+\usepackage{tocloft}
+
+% Math environment + symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Control caption layout
+\usepackage[format=plain,labelfont={bf,it},textfont=it]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
+
+% Multi-line comments (via \begin{comment} ... \end{comment})
+\usepackage{comment}
+
+% Support for diacritics
+\usepackage[T1]{fontenc} 
+
+% Control page layout / margins
 \usepackage{geometry}
 \geometry{
     letterpaper,
@@ -5,24 +47,11 @@
     top=20mm,
     bottom=20mm
 }
-\usepackage{tocloft}
+
+% More options for graphics
 \usepackage{graphicx}
-\usepackage{authblk}
-\usepackage{amssymb}
-\usepackage{lipsum}
-\usepackage{float}
-\usepackage{times}
-\usepackage{amsmath}
-\usepackage[format=plain,
-            labelfont={bf,it},
-            textfont=it]{caption}
-\captionsetup{justification=raggedright,singlelinecheck=false}
-\usepackage{ragged2e}
-\usepackage{longtable}
-\usepackage{comment}
-\usepackage{setspace}
-\usepackage{fancyhdr}
-\usepackage{titlesec}
+
+% Hyperlinks
 \usepackage[hyperindex,breaklinks]{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -30,34 +59,23 @@
     filecolor=magenta,      
     urlcolor=blue
 }
-\usepackage[T1]{fontenc}
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
-\pagenumbering{gobble}
-\usepackage[skip=10pt plus1pt, indent=40pt]{parskip}
+
+% Code listings
+\usepackage{listings}
+
+% ORCID links
 \usepackage{orcidlink}
+
+% Improve paragraph spacing
+\usepackage[skip=10pt plus1pt, indent=40pt]{parskip}
+
+% LaTeX magic necessary for compilation
 \usepackage{standalone}
 
-\titlespacing*{\section}
-{0pt}{1.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+% Document font, open alternative to Helvetica
+\usepackage{tgheros}
+\renewcommand{\familydefault}{\sfdefault}
 
-\renewcommand\Authfont{\fontsize{12}{14.4}\selectfont}
-\renewcommand\Affilfont{\fontsize{9}{10.8}\itshape}
-
-\newcommand{\cosigpart}[1]{
-  \addcontentsline{toc}{part}{#1}
-}
-\begin{comment}
-\newcommand{\cosigsection}[1]{
-  \section*{#1}
-  \phantomsection % avoid warnings from hyperref about the anchor of a bookmark and its parent's
-  \addcontentsline{toc}{section}{#1}
-}
-\end{comment}
-
-\newcommand{\cosigsection}[2]{
-  \section*{#1}
-  \phantomsection % avoid warnings from hyperref about the anchor of a bookmark and its parent's
-  Last updated: #2 | \href{https://cosig.net}{cosig.net} | DOI: \href{https://doi.org/10.17605/OSF.IO/2KDEZ}{10.17605/OSF.IO/2KDEZ}
-  \addcontentsline{toc}{section}{#1}
-}
+% Control title layout
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{1.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
